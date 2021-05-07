@@ -1,0 +1,14 @@
+package ${packgePath}.param;
+
+
+import lombok.Data;
+
+
+@Data
+public class ${className}Param {
+
+	
+${entityData}
+	
+
+}
