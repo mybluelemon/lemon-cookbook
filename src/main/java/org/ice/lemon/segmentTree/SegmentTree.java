@@ -61,11 +61,45 @@ updateValueUtil(arr, as, mid , leftChild, i, diff);
         updateValueUtil(arr, mid+1, ae , rightChild, i, diff);
 
     }
+
+    public int getSum(int[] arr , int L , int R){
+return getSumUtil(arr, 0, arr.length-1, 0, L, R);
+    }
+
+    public int getSumUtil(int[] arr , int as , int ae , int si, int L , int R){
+        if(L > ae || R < as){
+            return 0;
+        }else if(L == as  && R == ae){
+            return st[si];
+        }
+        //需要分层
+        int mid = getMid( as , ae);
+        int leftChild = 2 * si + 1 ;
+        int rightChild = 2 * si + 2 ;
+        if(L > mid){
+            // only right
+          return  getSumUtil(arr, mid+1, ae, rightChild, mid+1, R);
+        }else if(R <= mid){
+          return   getSumUtil(arr, as , mid, leftChild, L, mid);
+        }
+        //两边都占着了
+       return getSumUtil(arr, mid+1, ae, rightChild, mid+1, R) + getSumUtil(arr, as , mid, leftChild, L, mid);
+
+
+
+    }
+    public void updateRange(int[] arr, int us , int ue, int diff){
+
+    }
     public static void main(String[] args) {
         int arr[] = {1, 3, 5, 7, 6, 11};
         SegmentTree  segmentTree =  new SegmentTree(arr, 6);
         segmentTree.updateValue(arr, 4, 9);
         segmentTree.print();
+        System.out.println(".....");
+        System.out.println(segmentTree.getSum(arr, 2, 5));
 
     }
+
+
 }
